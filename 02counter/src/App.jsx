@@ -16,9 +16,21 @@ function App() {
      return;
     }else{
     console.log("clicked",counter)
-    counter =counter+1;
+    // counter =counter+1;
     // AtharvaCounter(counter +1)
-    setCounter(counter)
+   /* setCounter(counter + 1)
+    setCounter(counter + 1)
+    setCounter(counter + 1)
+    setCounter(counter + 1)
+    setCounter(counter + 1) */
+// this will wait for process therefore it will run only once
+
+    setCounter(prevcount =>prevcount + 1)
+    setCounter(prevcount =>prevcount + 1)
+    setCounter(prevcount =>prevcount + 1)
+    setCounter(prevcount =>prevcount + 1)
+    setCounter(prevcount =>prevcount + 1)
+    // in this way we have to make a arrows
     }
   }
 
