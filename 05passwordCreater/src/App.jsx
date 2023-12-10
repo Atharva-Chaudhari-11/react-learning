@@ -1,5 +1,9 @@
-import { useState,useCallback} from "react"
+import { useState,useCallback,useEffect,useRef} from "react"
 
+//useSate --> It is use to make the continuous changes at multiple times
+//useCallBack --> It is use to call the multiple filds using the dependencis
+//useEffect --> it is use to make the effect to call a function on selected dependemcis
+//useRef --> it ref the some filds like--see the selection part in input 
 
 function App() {
   
@@ -7,6 +11,10 @@ function App() {
   const [numberAllow,setNumberAllow]=useState(false)
   const [charAllow,setCharAllow]=useState(false)
   const [password,setPassword]=useState("")
+
+  const PasswordRef =useRef(null)
+
+
 
   // const passwordGenerator = useCallback(fn,dependencies)
   const passwordGenerator = useCallback(()=>{
@@ -19,11 +27,22 @@ function App() {
     for (let i = 1; i < length; i++) {
       let char= Math.floor(Math.random() *str.length + 1)
       //char return some index
-      pass = str.charAt(char)      
+      pass += str.charAt(char)      
     }
     setPassword(pass)
 
   },[length,numberAllow,charAllow,setPassword])
+
+  const copyCurrentClipboard = useCallback(()=>{
+    PasswordRef.current?.select()
+    // PasswordRef.current?.setSelectionRange(0,3)  
+    //setSelectionRange() is use to select the password in range
+    window.navigator.clipboard.writeText(password)
+  },[password])
+
+  useEffect(()=>{
+    passwordGenerator()
+  },[length,numberAllow,charAllow,passwordGenerator])
 
   return (
     <>
@@ -38,9 +57,12 @@ function App() {
         value={password}
         className="w-full outline-none px-3 py-1"
         placeholder="password"     
-        readOnly  
+        readOnly
+       ref={PasswordRef}
         />
-        <button className=" outline-none bg-blue-700 text-white px-2 py-0.5 shrink-0">
+        <button className=" hover:bg-red-800 outline-none focus:ring-4 focus:ring-green-300 bg-blue-700 text-white px-2 py-0.5 shrink-0"
+        onClick={copyCurrentClipboard}
+        >
           copy
         </button>
       </div>
