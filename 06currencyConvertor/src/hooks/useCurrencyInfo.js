@@ -6,14 +6,15 @@ import {useEffect , useState} from "react"
 // in most of cases function start with 'use' used as a starting letter to understan it we can use
 
 function useCurrencyInfo(currency) {
-    const [data ,setData]=useState({})
-     useEffect(()=>{
+    const [Data,setData] = useState({})
+    useEffect(()=>{
         fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)
         .then((res)=>res.json())
-        .then((res)=>setData(res[currency])) 
+        .then((res)=>setData(res[currency]))
+        console.log(Data+"currency")
     },[currency])
-    console.log(data);          
-    return data
+    console.log(Data)
+    return Data;
 }
 
 

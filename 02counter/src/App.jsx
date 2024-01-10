@@ -33,6 +33,7 @@ function App() {
     // in this way we have to make a arrows
     }
   }
+  
 
   const removeVal=()=>{
     if(counter > 0){
@@ -42,6 +43,7 @@ function App() {
       return;
       }
   }
+
   return (
     <>
  <h1>Chai aur react </h1>
